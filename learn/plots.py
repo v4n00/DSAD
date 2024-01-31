@@ -13,7 +13,7 @@ def linePlot(alpha, title='Line plot'):
     plt.figure(figsize=(11, 8))
     plt.title(title)
     Xindex = ['C' + str(k + 1) for k in range(len(alpha))]
-    plt.plot(Xindex, alpha)
+    plt.plot(Xindex, alpha, 'bo-')
     plt.axhline(1, color='r')
 
 def biplot(x, y, title='Biplot'):
