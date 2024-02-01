@@ -1,12 +1,12 @@
-import factor_analyzer as fa
 import pandas as pd
+from factor_analyzer import FactorAnalyzer, calculate_kmo
 
 x_df = pd.DataFrame() # standardized
 
-kmo = fa.calculate_kmo(x_df)
+kmo = calculate_kmo(x_df)
 # kmo[1] trb sa fie > 0.6
 
-EFAModel = fa.FactorAnalyzer(n_factors=len(x_df.columns.values))
+EFAModel = FactorAnalyzer(n_factors=len(x_df.columns.values))
 EFAModel.fit(x_df)
 factorLoadings = EFAModel.loadings_ # aka common factors
 specificFactors = EFAModel.get_uniquenesses()
