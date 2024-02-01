@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sb
-import sklearn.discriminant_analysis as skl
-import sklearn.model_selection as sklt
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
 # ᗜˬᗜ - subiect examen furtuna 2023
@@ -35,8 +35,8 @@ tinta = 'VULNERAB'
 dict = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7}
 x[tinta] = x[tinta].map(dict)
 
-x_train, x_test, y_train, y_test = sklt.train_test_split(x, x[tinta], train_size=0.4)
-model = skl.LinearDiscriminantAnalysis()
+x_train, x_test, y_train, y_test = train_test_split(x, x[tinta], train_size=0.4)
+model = LinearDiscriminantAnalysis()
 model.fit(x_train, y_train)
 scores = model.transform(x_test)
 

@@ -1,9 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import scipy.cluster.hierarchy as hic
-import scipy.spatial.distance as dis
-import sklearn.cluster as skl
+from scipy.cluster.hierarchy import fcluster, linkage
+from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 
 # ᗜˬᗜ - subiect examen furtuna 2024
@@ -30,11 +29,11 @@ merged[['Continent'] + labels] \
 # B1
 x = StandardScaler().fit_transform(merged[labels])
 
-HC = hic.linkage(x, method='ward')
+HC = linkage(x, method='ward')
 print(HC)
 
 # B2
-cat = hic.fcluster(HC, 5, criterion='maxclust')
+cat = fcluster(HC, 5, criterion='maxclust')
 clusters =  ['C' + str(i) for i in cat]
 
 merged['Clusters'] = clusters
@@ -51,7 +50,7 @@ for j in range(a.shape[1]):
         a[:, j] = -a[:, j]
 C = x @ a
 
-kmeans = skl.KMeans(n_clusters=5, n_init=10)
+kmeans = KMeans(n_clusters=5, n_init=10)
 kmeans_labels = kmeans.fit_predict(C)
 plt.figure(figsize=(8, 6))
 plt.scatter(C[:, 0], C[:, 1], c=kmeans_labels, cmap='viridis')

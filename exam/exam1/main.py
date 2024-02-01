@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import sklearn.cross_decomposition as skl
+from sklearn.cross_decomposition import CCA
 from sklearn.preprocessing import StandardScaler
 
 rawInd = pd.read_csv('./dataIN/Industrie.csv', index_col=0)
@@ -39,7 +39,7 @@ y.to_csv('./dataOUT/Ystd.csv')
 n, p = x.shape
 q = y.shape[1]
 m = min(p, q)
-modelCCA = skl.CCA(n_components=m)
+modelCCA = CCA(n_components=m)
 modelCCA.fit(x, y)
 z, u = modelCCA.transform(x, y)
 

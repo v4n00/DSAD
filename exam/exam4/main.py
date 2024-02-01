@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sb
+from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
 # ᗜˬᗜ - subiect examen furtuna 2024
@@ -28,21 +29,15 @@ merged \
 # B1
 x = StandardScaler().fit_transform(merged[labels])
 
-cov = np.cov(x, rowvar=False)
-eigenvalues, eigenvectors = np.linalg.eigh(cov)
-k_desc = [k for k in reversed(np.argsort(eigenvalues))]
-alpha = eigenvalues[k_desc]
-a = eigenvectors[:, k_desc]
-for j in range(a.shape[1]):
-    if np.abs(np.min(a[:, j])) > np.abs(np.max(a[:, j])):
-        a[:, j] = -a[:, j]
+pca = PCA()
+pca.fit(x)
+alpha = pca.explained_variance_
+pve = pca.explained_variance_ratio_
 
-var = alpha
 var_cum = np.cumsum(alpha)
-pve = alpha / np.sum(alpha)
 pve_cum = np.cumsum(pve)
 
-pd.DataFrame(data={'Varianta componentelor':var,
+pd.DataFrame(data={'Varianta componentelor': alpha,
                     'Varianta cumulata': var_cum,
                     'Procentul de varianta explicata': pve, 
                     'Procentul cumulat': pve_cum}) \
@@ -57,6 +52,7 @@ plt.axhline(1, c='r')
 plt.show()
 
 # B3
+a = pca.components_
 Rxc = a * np.sqrt(alpha)
 communalities = np.cumsum(Rxc * Rxc, axis=1)
 communalities_df = pd.DataFrame(data=communalities, index=labels, columns=['C' + str(i + 1) for i in range(communalities.shape[1])])

@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sb
+from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
 # ᗜˬᗜ - subiect examen furtuna 2023
@@ -25,19 +26,14 @@ merged \
 # B1
 x = StandardScaler().fit_transform(merged[labels])
 
-cov = np.cov(x, rowvar=False)
-eigenvalues, eigenvectors = np.linalg.eigh(cov)
-k_desc = [k for k in reversed(np.argsort(eigenvalues))]
-alpha = eigenvalues[k_desc]
+pca = PCA()
+pca.fit(x)
+alpha = pca.explained_variance_
 
 print(alpha)
 
 # B2
-a = eigenvectors[:, k_desc]
-for j in range(a.shape[1]):
-    if np.abs(np.min(a[:, j])) > np.abs(np.max(a[:, j])):
-        a[:, j] = -a[:, j]
-C = x @ a
+C = pca.transform(x)
 scores = C / np.sqrt(alpha)
 
 pd.DataFrame(data=scores, index=rawMort.index.values, columns=['C' + str(i + 1) for i in range(C.shape[1])]) \

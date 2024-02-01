@@ -1,8 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import scipy.cluster.hierarchy as hic
-import scipy.spatial.distance as dis
+from scipy.cluster.hierarchy import dendrogram, fcluster, linkage
 from sklearn.preprocessing import StandardScaler
 
 # ᗜˬᗜ - subiect examen furtuna 2023
@@ -29,7 +28,7 @@ merged[['Continent'] + labels] \
 # B1
 x = StandardScaler().fit_transform(merged[labels])
 
-HC = hic.linkage(x, method='ward')
+HC = linkage(x, method='ward')
 print(HC)
 
 # B2
@@ -42,12 +41,12 @@ t = (HC[j, 2] + HC[j + 1, 2]) / 2
 
 plt.figure(figsize=(12, 12))
 plt.title('Dendogram')
-hic.dendrogram(HC, leaf_rotation=30, labels=merged.index.values)
+dendrogram(HC, leaf_rotation=30, labels=merged.index.values)
 plt.axhline(t, c='r')
 plt.show()
 
 # B3
-cat = hic.fcluster(HC, n - j, criterion='maxclust')
+cat = fcluster(HC, n - j, criterion='maxclust')
 clusters = ['C' + str(i) for i in cat]
 
 merged['Clusters'] = clusters
