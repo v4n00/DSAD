@@ -23,7 +23,7 @@ def clusters(h: np.ndarray, k):
         g[g == k1] = n + i
         g[g == k2] = n + i
     cat = pd.Categorical(g)
-    return ['C' + str(i) for i in cat.codes], cat.codes
+    return ['C' + str(i) for i in cat.codes]
 
 methods = list(hic._LINKAGE_METHODS)
 distances = dis._METRICS_NAMES
@@ -36,6 +36,4 @@ t, j, n = threshold(HC)
 k = n - j
 
 # determine the clusters belonging to the maximum stability partition
-labels, codes = clusters(HC, k)
-print(labels)
-print(codes)
+labels = clusters(HC, k) # add this to the original DataFrame
