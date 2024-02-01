@@ -4,33 +4,35 @@ import pandas as pd
 import seaborn as sb
 import sklearn.discriminant_analysis as skl
 import sklearn.model_selection as sklt
+from sklearn.preprocessing import StandardScaler
 
 # ᗜˬᗜ - subiect examen furtuna 2023
 ind = pd.read_csv('./dataIN/Industrie.csv', index_col=0)
 pop = pd.read_csv('./dataIN/PopulatieLocalitati.csv', index_col=0)
-labInd = list(ind.columns[1:].values)
+labels = list(ind.columns[1:].values)
 
 merged = ind.merge(right=pop, right_index=True, left_index=True) \
 .drop(columns='Localitate_y') \
-.rename(columns={'Localitate_x' : 'Localitate'})[['Judet', 'Localitate', 'Populatie'] + labInd]
+.rename(columns={'Localitate_x' : 'Localitate'})[['Judet', 'Localitate', 'Populatie'] + labels]
+merged.fillna(np.mean(merged[labels], axis=0), inplace=True)
 
 # A1
-merged[['Localitate', 'Populatie'] + labInd] \
-.apply(lambda row: row[labInd] / row['Populatie'], axis=1) \
+merged[['Localitate', 'Populatie'] + labels] \
+.apply(lambda row: row[labels] / row['Populatie'], axis=1) \
 .to_csv('./dataOUT/Cerinta1.csv')
 
 # A2
-r2 = merged[['Judet'] + labInd].groupby('Judet').sum()
+r2 = merged[['Judet'] + labels].groupby('Judet').sum()
 r2['Cifra Afaceri'] = r2.max(axis=1)
 r2['Activitate'] = r2.idxmax(axis=1)
 r2[['Cifra Afaceri','Activitate']] \
 .to_csv('./dataOUT/Cerinta2.csv')
 
 # B1
-x = pd.read_csv('./dataIN/ProiectB.csv')
+x = StandardScaler().fit_transform(pd.read_csv('./dataIN/ProiectB.csv'))
 tinta = 'VULNERAB'
-dict = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7}
 
+dict = {'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6, 'G': 7}
 x[tinta] = x[tinta].map(dict)
 
 x_train, x_test, y_train, y_test = sklt.train_test_split(x, x[tinta], train_size=0.4)

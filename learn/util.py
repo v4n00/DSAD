@@ -1,13 +1,12 @@
 import numpy as np
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
 
+x = pd.DataFrame()
+labels = list() # list of labels for variables
 
-def standardise(x):
-    means = np.mean(x, axis=0)
-    stds = np.std(x, axis=0)
-    return (x - means) / stds
+# replace NAN 
+x.fillna(np.mean(x[labels], axis=0), inplace=True)
 
-def replaceNAN(x):
-    means = np.nanmean(x, axis=0)
-    locs = np.where(np.isnan(x))
-    x[locs] = means[locs[1]]
-    return x
+# standardize
+x = StandardScaler().fit_transform(x)

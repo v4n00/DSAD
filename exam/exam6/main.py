@@ -2,12 +2,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sb
+from sklearn.preprocessing import StandardScaler
 
 # ᗜˬᗜ - subiect examen furtuna 2023
 rawMort = pd.read_csv('./dataIN/Mortalitate.csv', index_col=0)
 rawCoduri = pd.read_csv('./dataIN/CoduriTariExtins.csv', index_col=0)
+labels = rawMort.columns.values
 
 merged = rawCoduri.merge(rawMort, left_index=True, right_index=True)
+merged.fillna(np.mean(merged[labels], axis=0), inplace=True)
 
 # A1
 merged[merged['RS'] < 0] \
@@ -20,10 +23,7 @@ merged \
 .to_csv('./dataOUT/cerinta2.csv')
 
 # B1
-x = rawMort.values
-means = np.mean(x, axis=0)
-stds = np.std(x, axis=0)
-x = (x - means) / stds
+x = StandardScaler().fit_transform(merged[labels])
 
 cov = np.cov(x, rowvar=False)
 eigenvalues, eigenvectors = np.linalg.eigh(cov)
