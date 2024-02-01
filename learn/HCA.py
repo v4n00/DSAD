@@ -1,7 +1,5 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import scipy.cluster.hierarchy as hic
-import scipy.spatial.distance as dis
 from scipy.cluster.hierarchy import _LINKAGE_METHODS, fcluster, linkage
 from scipy.spatial.distance import _METRICS_NAMES
 from sklearn.cluster import KMeans
