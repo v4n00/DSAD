@@ -1,7 +1,9 @@
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import scipy.cluster.hierarchy as hic
 import scipy.spatial.distance as dis
+import sklearn.cluster as skl
 
 x = np.ndarray() # standardized
 
@@ -37,3 +39,10 @@ k = n - j
 
 # determine the clusters belonging to the maximum stability partition
 labels = clusters(HC, k) # add this to the original DataFrame
+
+# KMeans
+C = np.ndarray() # principal components
+noClusters = 5 # how many clusters you want
+kmeans = skl.KMeans(n_clusters=noClusters, n_init=10)
+kmeans_labels = kmeans.fit_predict(C)
+plt.scatter(C[:, 0], C[:, 1], c=kmeans_labels, cmap='viridis')
