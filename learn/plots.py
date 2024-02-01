@@ -1,13 +1,13 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import scipy.cluster.hierarchy as hic
-import seaborn as sb
+from scipy.cluster.hierarchy import dendrogram
+from seaborn import heatmap
 
 
-def correlogram(C, title='Correlogram'):
+def correlogram(x, title='Correlogram'):
     plt.figure(figsize=(15, 11))
     plt.title(title)
-    sb.heatmap(data=np.round(C, 2), vmin=-1, vmax=1, cmap='bwr', annot=True)
+    heatmap(data=x, vmin=-1, vmax=1, cmap='bwr', annot=True)
 
 def linePlot(alpha, title='Line plot'):
     plt.figure(figsize=(11, 8))
@@ -28,5 +28,5 @@ def biplot(x, y, title='Biplot'):
 def dendrogram(h, labels, threshold, title='Hierarchical Clusters'):
     plt.figure(figsize=(15, 8))
     plt.title(title)
-    hic.dendrogram(h, labels=labels, leaf_rotation=30)
+    dendrogram(h, labels=labels, leaf_rotation=30)
     plt.axhline(threshold, c='r')
