@@ -4,7 +4,7 @@ import sklearn.preprocessing as pp
 x = np.ndarray() # standardized
 y = np.ndarray() # standardized
 
-n, p = x.shape
+p = x.shape[1]
 q = y.shape[1]
 Cov = np.cov(x, y, rowvar=False)
 CX = np.cov(x, rowvar=False)

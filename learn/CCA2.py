@@ -4,7 +4,7 @@ import sklearn.cross_decomposition as skl
 x = np.ndarray() # standardized
 y = np.ndarray() # standardized
 
-n, p = x.shape
+p = x.shape[1]
 q = y.shape[1]
 m = min(p, q)
 modelCCA = skl.CCA(n_components=m)
