@@ -28,9 +28,8 @@ merged.set_index('Country') \
 
 # B1
 x = StandardScaler().fit_transform(rawAir[labels])
-distances = dis._METRICS_NAMES
 
-HC = hic.linkage(x, method='ward', metric=distances[7])
+HC = hic.linkage(x, method='ward')
 print(HC)
 
 # B2

@@ -28,9 +28,8 @@ merged[['Continent'] + labels] \
 
 # B1
 x = StandardScaler().fit_transform(merged[labels])
-distances = dis._METRICS_NAMES
 
-HC = hic.linkage(x, method='ward', metric=distances[7])
+HC = hic.linkage(x, method='ward')
 print(HC)
 
 # B2
