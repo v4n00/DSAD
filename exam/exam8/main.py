@@ -5,6 +5,7 @@ import seaborn as sb
 import sklearn.discriminant_analysis as skl
 import sklearn.model_selection as sklt
 
+# ᗜˬᗜ - subiect examen furtuna 2023
 ind = pd.read_csv('./dataIN/Industrie.csv', index_col=0)
 pop = pd.read_csv('./dataIN/PopulatieLocalitati.csv', index_col=0)
 labInd = list(ind.columns[1:].values)

@@ -10,5 +10,5 @@ m = min(p, q)
 modelCCA = skl.CCA(n_components=m)
 modelCCA.fit(x, y)
 z, u = modelCCA.transform(x, y)
-Rxz = modelCCA.x_loadings_
-Ryu = modelCCA.y_loadings_
+Rxz = np.corrcoef(x, z[:, :m], rowvar=False)[:p, p:]
+Ryu = np.corrcoef(y, u[:, :m], rowvar=False)[:q, q:]
