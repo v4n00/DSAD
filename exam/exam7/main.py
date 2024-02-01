@@ -3,9 +3,8 @@ import numpy as np
 import pandas as pd
 import scipy.cluster.hierarchy as hic
 import scipy.spatial.distance as dis
-import sklearn.cluster as skl
 
-# ᗜˬᗜ - subiect examen furtuna 2024
+# ᗜˬᗜ - subiect examen furtuna 2023
 rawAlcohol = pd.read_csv('./dataIN/alcohol.csv', index_col=0)
 rawCoduri = pd.read_csv('./dataIN/CoduriTariExtins.csv', index_col=0)
 labAni = list(rawAlcohol.columns[1:].values)
@@ -13,6 +12,7 @@ labAni = list(rawAlcohol.columns[1:].values)
 merged = rawAlcohol.merge(rawCoduri, left_index=True, right_index=True) \
 .drop(columns='Code')[['Continent'] + labAni]
 merged.fillna(np.mean(merged[labAni], axis=0), inplace=True)
+
 
 # A1
 merged \
@@ -39,6 +39,20 @@ HC = hic.linkage(x, method='ward', metric=distances[7])
 print(HC)
 
 # B2
+n = HC.shape[0]
+dist_1 = HC[1:n, 2]
+dist_2 = HC[0:n - 1, 2]
+diff = dist_1 - dist_2
+j = np.argmax(diff)
+t = (HC[j, 2] + HC[j + 1, 2]) / 2
+
+plt.figure(figsize=(12, 12))
+plt.title('Dendogram')
+hic.dendrogram(HC, leaf_rotation=30, labels=merged.index.values)
+plt.axhline(t, c='r')
+plt.show()
+
+# B3
 def clusters(h: np.ndarray, k):
     n = h.shape[0] + 1
     g =  np.arange(0, n)
@@ -50,27 +64,6 @@ def clusters(h: np.ndarray, k):
     cat = pd.Categorical(g)
     return ['C' + str(i + 1) for i in cat.codes]
 
-labels = clusters(HC, 5)
+labels = clusters(HC, n - j)
 merged['Clusters'] = labels
-merged[['Clusters']].to_csv('./dataOUT/p4.csv')
-
-# B3
-cov = np.cov(x, rowvar=False)
-eigenvalues, eigenvectors = np.linalg.eigh(cov)
-k_desc = [k for k in reversed(np.argsort(eigenvalues))]
-alpha = eigenvalues[k_desc]
-a = eigenvectors[:, k_desc]
-for j in range(a.shape[1]):
-    if np.abs(np.min(a[:, j])) > np.abs(np.max(a[:, j])):
-        a[:, j] = -a[:, j]
-C = x @ a
-
-kmeans = skl.KMeans(n_clusters=5, n_init=10)
-kmeans_labels = kmeans.fit_predict(C)
-plt.figure(figsize=(8, 6))
-plt.scatter(C[:, 0], C[:, 1], c=kmeans_labels, cmap='viridis')
-plt.title("K-means Clustering on PCA Data")
-plt.show()
-
-# C
-# nu stiu lol ᗜˬᗜ
+merged['Clusters'].to_csv('./dataOUT/popt.csv')
