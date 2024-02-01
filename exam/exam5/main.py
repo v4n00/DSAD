@@ -40,15 +40,8 @@ print(HC)
 
 # B2
 def clusters(h: np.ndarray, k):
-    n = h.shape[0] + 1
-    g =  np.arange(0, n)
-    for i in range(n - k):
-        k1 = h[i, 0]
-        k2 = h[i, 1]
-        g[g == k1] = n + i
-        g[g == k2] = n + i
-    cat = pd.Categorical(g)
-    return ['C' + str(i + 1) for i in cat.codes]
+    cat = hic.fcluster(h, k, criterion='maxclust')
+    return ['C' + str(i) for i in cat]
 
 labels = clusters(HC, 5)
 merged['Clusters'] = labels

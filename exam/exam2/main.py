@@ -43,6 +43,9 @@ print(alpha)
 
 # B2
 a = eigenvectors[:, k_desc]
+for j in range(a.shape[1]):
+    if np.abs(np.min(a[:, j])) > np.abs(np.max(a[:, j])):
+        a[:, j] = -a[:, j]
 C = x @ a
 Rxc = a * np.sqrt(alpha)
 scores = C / np.sqrt(alpha)

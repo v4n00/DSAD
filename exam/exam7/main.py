@@ -13,7 +13,6 @@ merged = rawAlcohol.merge(rawCoduri, left_index=True, right_index=True) \
 .drop(columns='Code')[['Continent'] + labAni]
 merged.fillna(np.mean(merged[labAni], axis=0), inplace=True)
 
-
 # A1
 merged \
 .apply(lambda row: np.average(row[labAni]), axis=1) \
@@ -54,15 +53,8 @@ plt.show()
 
 # B3
 def clusters(h: np.ndarray, k):
-    n = h.shape[0] + 1
-    g =  np.arange(0, n)
-    for i in range(n - k):
-        k1 = h[i, 0]
-        k2 = h[i, 1]
-        g[g == k1] = n + i
-        g[g == k2] = n + i
-    cat = pd.Categorical(g)
-    return ['C' + str(i + 1) for i in cat.codes]
+    cat = hic.fcluster(h, k, criterion='maxclust')
+    return ['C' + str(i) for i in cat]
 
 labels = clusters(HC, n - j)
 merged['Clusters'] = labels
