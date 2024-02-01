@@ -20,6 +20,8 @@ merged[['Country'] + labValAdaugata] \
 .to_csv('./dataOUT/Cerinta1.csv')
 
 # A2
+# este corect asa, stop asking, foloseste formula de population la std ce am scris eu aici,
+# daca dai direct .std pe dataframe foloseste formula de sample la std si nu e bun
 merged[['Continent'] + labInd] \
 .groupby('Continent') \
 .apply(func=lambda df: pd.Series({ind: np.round(np.std(df[ind]) / np.mean(df[ind]) * 100, 2) for ind in labInd})) \
