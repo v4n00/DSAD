@@ -4,10 +4,9 @@ from sklearn.decomposition import PCA
 x = np.ndarray() # standardized
 
 pca = PCA()
-pca.fit(x)
+C = pca.fit_transform(x)
 alpha = pca.explained_variance_
 a = pca.components_
-C = pca.transform(x)
 rxc = a * np.sqrt(alpha) # factor loadings
 scores = C / np.sqrt(alpha)
 C2 = C * C
