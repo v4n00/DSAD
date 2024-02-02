@@ -18,6 +18,7 @@ merged.fillna(np.mean(merged[labels], axis=0), inplace=True)
 # A1
 merged \
 .apply(lambda row: np.average(row[labels]), axis=1) \
+.sort_values(ascending=False) \
 .to_csv('./dataOUT/Cerinta1.csv')
 
 # A2
