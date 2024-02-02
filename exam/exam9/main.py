@@ -44,12 +44,11 @@ pd.DataFrame(z, index=merged.index.values, columns=zlabels).to_csv('./dataOUT/z.
 pd.DataFrame(u, index=merged.index.values, columns=ulabels).to_csv('./dataOUT/u.csv')
 
 # B2
-rxz = np.corrcoef(x, z[:, :m], rowvar=False)[:p, p:]
-ryu = np.corrcoef(y, u[:, :m], rowvar=False)[:q, q:]
+r = []
+for i in range(m):
+    r.append(np.corrcoef(z[:, i], u[:, i], rowvar=False)[0, 1])
 
-pd.DataFrame(rxz.T, columns=labels1) \
-.merge(pd.DataFrame(ryu.T, columns=labels2), left_index=True, right_index=True) \
-.to_csv('./dataOUT/r.csv')
+pd.DataFrame(r).to_csv('./dataOUT/r.csv')
 
 # B3
 # nu fac toata functia de bartlett ᗜˬᗜ

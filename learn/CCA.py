@@ -11,3 +11,6 @@ modelCCA = CCA(n_components=m)
 z, u = modelCCA.fit_transform(x, y)
 Rxz = np.corrcoef(x, z[:, :m], rowvar=False)[:p, p:]
 Ryu = np.corrcoef(y, u[:, :m], rowvar=False)[:q, q:]
+r = []
+for i in range(m):
+    r.append(np.corrcoef(z[:, i], u[:, i], rowvar=False)[0, 1])
