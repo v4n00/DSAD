@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import seaborn as sb
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
@@ -42,5 +41,5 @@ pd.DataFrame(data=scores, index=rawMort.index.values, columns=['C' + str(i + 1) 
 # B3
 plt.figure(figsize=(12, 12))
 plt.title('Scoruri')
-sb.heatmap(np.round(scores, 2), vmin=-1, vmax=1, annot=True, cmap='bwr')
+plt.scatter(scores[:, 0], scores[:, 1])
 plt.show()

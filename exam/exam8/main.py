@@ -45,8 +45,8 @@ pd.DataFrame(data=scores) \
 
 # B2
 plt.figure(figsize=(12, 12))
-plt.title('Corelograma scorurilor')
-sb.heatmap(np.round(scores, 2), vmin=-1, vmax=1, annot=True, cmap='bwr')
+plt.title('Scoruri')
+plt.scatter(scores[:, 0], scores[:, 1])
 plt.show()
 
 # B3

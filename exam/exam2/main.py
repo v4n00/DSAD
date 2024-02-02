@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import seaborn as sb
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
@@ -45,8 +44,8 @@ pd.DataFrame(data=np.round(scores, 2), index=indexes, columns=labels).to_csv('./
 
 # B3
 plt.figure(figsize=(12, 9))
-plt.title('Corelograma scorurilor')
-sb.heatmap(scores, vmin=-1, vmax=1, annot=True, cmap='bwr')
+plt.title('Scoruri')
+plt.scatter(scores[:, 0], scores[:, 1])
 plt.show()
 
 # C
