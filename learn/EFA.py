@@ -1,14 +1,13 @@
-import pandas as pd
+import numpy as np
 from factor_analyzer import FactorAnalyzer, calculate_kmo
 
-x_df = pd.DataFrame() # standardized
+x = np.ndarray() # standardized
 
-kmo = calculate_kmo(x_df)
-# kmo[1] trb sa fie > 0.6
+kmo = calculate_kmo(x) # kmo[1] trb sa fie > 0.6
 
-EFAModel = FactorAnalyzer(n_factors=len(x_df.columns.values))
-EFAModel.fit(x_df)
-scores = EFAModel.transform(x_df)
-factorLoadings = EFAModel.loadings_ # aka common factors
-specificFactors = EFAModel.get_uniquenesses()
-eigenValues = EFAModel.get_eigenvalues() # aka principal components
+efa = FactorAnalyzer(n_factors=x.shape[1] - 1) # nr de factori e nr de coloane - 1
+scores = efa.fit_transform(x)
+factorLoadings = efa.loadings_
+eigenvalues = efa.get_eigenvalues()
+communalities = efa.get_communalities()
+specificFactors = efa.get_uniquenesses()
