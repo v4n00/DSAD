@@ -30,6 +30,7 @@ r2[['Cifra Afaceri','Activitate']] \
 
 # B1
 x = pd.read_csv('./dataIN/ProiectB.csv', index_col=0)
+labels = list(x.columns.values[:-1]) # restul de coloane
 tinta = 'VULNERAB' # coloana care trb sa prezicem
 
 # mapam literele in numere
@@ -38,7 +39,7 @@ x[tinta] = x[tinta].map(dict)
 
 # functia primeste ca prim argument data set-ul fara tina, si al 2-lea argument doar coloana de tinta
 # imparte datasetu in 2 set-uri, fiecare are 1 set de train si unul de test
-x_train, x_test, y_train, y_test = train_test_split(x.loc[:, x.columns != tinta], x[tinta], train_size=0.4)
+x_train, x_test, y_train, y_test = train_test_split(x[labels], x[tinta], train_size=0.4)
 model = LinearDiscriminantAnalysis()
 model.fit(x_train, y_train) # invata modelul
 scores = model.transform(x_train) # doar da scoruri
