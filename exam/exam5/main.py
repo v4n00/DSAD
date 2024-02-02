@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 from scipy.cluster.hierarchy import fcluster, linkage
 from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
 # ᗜˬᗜ - subiect examen furtuna 2024
@@ -40,15 +41,8 @@ merged['Clusters'] = clusters
 merged[['Clusters']].to_csv('./dataOUT/p4.csv')
 
 # B3
-cov = np.cov(x, rowvar=False)
-eigenvalues, eigenvectors = np.linalg.eigh(cov)
-k_desc = [k for k in reversed(np.argsort(eigenvalues))]
-alpha = eigenvalues[k_desc]
-a = eigenvectors[:, k_desc]
-for j in range(a.shape[1]):
-    if np.abs(np.min(a[:, j])) > np.abs(np.max(a[:, j])):
-        a[:, j] = -a[:, j]
-C = x @ a
+pca = PCA()
+C = pca.fit_transform(x)
 
 kmeans = KMeans(n_clusters=5, n_init=10)
 kmeans_labels = kmeans.fit_predict(C)
