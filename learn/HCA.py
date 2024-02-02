@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from scipy.cluster.hierarchy import _LINKAGE_METHODS, fcluster, linkage
-from scipy.spatial.distance import _METRICS_NAMES
+from scipy.cluster.hierarchy import fcluster, linkage
 from sklearn.cluster import KMeans
 
 x = np.ndarray() # standardized
@@ -19,22 +18,15 @@ def clusters(h: np.ndarray, k):
     cat = fcluster(h, k, criterion='maxclust')
     return ['C' + str(i) for i in cat]
 
-methods = list(_LINKAGE_METHODS)
-distances = _METRICS_NAMES
-
-# methods[] ultimele 4
-# folosesc distances[7]
-# restul folosesc distances[3]
-HC = linkage(x, method=methods[3], metric=distances[7])
+HC = linkage(x, method='ward') # ce tip de metoda se da la exam
 t, j, n = threshold(HC)
-k = n - j
 
 # determine the clusters belonging to the maximum stability partition
+k = n - j
 labels = clusters(HC, k) # add this to the original DataFrame
 
 # KMeans
 C = np.ndarray() # principal components
-noClusters = 5 # how many clusters you want
-kmeans = KMeans(n_clusters=noClusters, n_init=10)
+kmeans = KMeans(n_clusters=5, n_init=10) # nr de clustere se da la exam
 kmeans_labels = kmeans.fit_predict(C)
 plt.scatter(C[:, 0], C[:, 1], c=kmeans_labels, cmap='viridis')
