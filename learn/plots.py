@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 from scipy.cluster.hierarchy import dendrogram
 from seaborn import heatmap
 
@@ -29,3 +30,14 @@ def dendrogram(h, labels, threshold, title='Hierarchical Clusters'):
     plt.title(title)
     dendrogram(h, labels=labels, leaf_rotation=30)
     plt.axhline(threshold, c='r')
+
+def correlationCircle(data, title='Correlation Circle'):
+    plt.figure(figsize=(12, 12))
+    plt.title(title)
+    T = [t for t in np.arange(0, np.pi*2, 0.01)]
+    X = [np.cos(t) for t in T]
+    Y = [np.sin(t) for t in T]
+    plt.plot(X, Y)
+    plt.axhline(0, c='g')
+    plt.axvline(0, c='g')
+    plt.scatter(data[:, 0], data[:, 1])
