@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.cluster.hierarchy import dendrogram
-from seaborn import heatmap
+from seaborn import heatmap, kdeplot
 
 
 def correlogram(x, title='Correlogram'):
@@ -41,3 +41,8 @@ def correlationCircle(data, title='Correlation Circle'):
     plt.axhline(0, c='g')
     plt.axvline(0, c='g')
     plt.scatter(data[:, 0], data[:, 1])
+
+def kdeplot(scores, title='Scoruri Discriminanta'):
+    plt.figure(figseize=(12, 12))
+    plt.title(title)
+    kdeplot(scores, fill=True)
