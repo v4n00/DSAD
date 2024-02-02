@@ -26,13 +26,12 @@ merged \
 x = StandardScaler().fit_transform(merged[labels])
 
 pca = PCA()
-pca.fit(x)
+C = pca.fit_transform(x)
 alpha = pca.explained_variance_
 
 print(alpha)
 
 # B2
-C = pca.transform(x)
 scores = C / np.sqrt(alpha)
 
 pd.DataFrame(data=scores, index=rawMort.index.values, columns=['C' + str(i + 1) for i in range(C.shape[1])]) \

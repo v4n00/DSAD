@@ -33,12 +33,11 @@ merged[['Continent'] + labels] \
 x = StandardScaler().fit_transform(merged[labels])
 
 pca = PCA()
-pca.fit(x)
+C = pca.fit_transform(x)
 alpha = pca.explained_variance_
 print(alpha)
 
 # B2
-C = pca.transform(x)
 scores = C / np.sqrt(alpha)
 pd.DataFrame(data=np.round(scores, 2), index=indexes, columns=labels).to_csv('./dataOUT/scoruri.csv')
 

@@ -30,7 +30,7 @@ merged \
 x = StandardScaler().fit_transform(merged[labels])
 
 pca = PCA()
-pca.fit(x)
+C = pca.fit_transform(x)
 alpha = pca.explained_variance_
 pve = pca.explained_variance_ratio_
 
@@ -52,7 +52,7 @@ plt.axhline(1, c='r')
 plt.show()
 
 # B3
-a = pca.components_
+a = pca.components_.T
 Rxc = a * np.sqrt(alpha)
 communalities = np.cumsum(Rxc * Rxc, axis=1)
 communalities_df = pd.DataFrame(data=communalities, index=labels, columns=['C' + str(i + 1) for i in range(communalities.shape[1])])
