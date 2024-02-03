@@ -14,6 +14,7 @@ merged.fillna(np.mean(merged[labels], axis=0), inplace=True)
 # req 1
 merged \
 .apply(lambda row: row[labels] / row['Populatie'], axis=1) \
+.merge(right=rawPop["Localitate"], right_index=True, left_index=True) \
 .to_csv('./dataOUT/Request_1.csv')
 
 # req 2
