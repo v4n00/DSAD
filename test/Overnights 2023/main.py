@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-# ᗜˬᗜ - subiect de test 2023
+# ᗜˬᗜ - example test subject 2024 (there was no test)
 '''
 The Overnights.csv file contains information on the number of overnight stays in tourist reception structures at locality level according to NSI (National Statistics Institute). The information is as follows:
 • Siruta - Siruta Code of the locality;

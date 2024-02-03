@@ -4,6 +4,8 @@ import pandas as pd
 from scipy.cluster.hierarchy import dendrogram, linkage
 from sklearn.preprocessing import StandardScaler
 
+# ᗜˬᗜ - subject exam 2024 Vinte
+# dataset is generated with ChatGPT
 rawNatLoc = pd.read_csv('./dataIN/NatLocMovements.csv', index_col=0)
 rawPop = pd.read_csv('./dataIN/PopulationLoc.csv', index_col=0)
 labels = list(rawNatLoc.columns.values[1:])

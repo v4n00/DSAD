@@ -5,7 +5,8 @@ import seaborn as sb
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
-# ᗜˬᗜ - subiect examen furtuna 2024
+# ᗜˬᗜ - subject exam 2024 Furtuna
+# dataset is generated with ChatGPT
 rawRata = pd.read_csv('./dataIN/Rata.csv', index_col=0)
 rawCoduri = pd.read_csv('./dataIN/CoduriTariExtins.csv', index_col=0)
 labels = list(rawRata.columns[1:].values)
@@ -63,4 +64,4 @@ sb.heatmap(communalities_df, vmin=-1, vmax=1, annot=True, cmap='bwr')
 plt.show()
 
 # C
-# nu stiu lol ᗜˬᗜ
+# I don't know

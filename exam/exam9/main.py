@@ -3,7 +3,8 @@ import pandas as pd
 from sklearn.cross_decomposition import CCA
 from sklearn.preprocessing import StandardScaler
 
-# ᗜˬᗜ - subiect examen furtuna 2024
+# ᗜˬᗜ - subject exam 2024 Furtuna
+# dataset is generated with ChatGPT
 rawEmmi = pd.read_csv('./dataIN/emmissions.csv', index_col=0)
 rawCodes = pd.read_csv('./dataIN/PopulatieEuropa.csv', index_col=0)
 labels = list(rawEmmi.columns[1:].values)
@@ -26,7 +27,7 @@ merged[['Region', 'Population'] + labels] \
 .to_csv('./dataOUT/Cerinta2.csv')
 
 # B1
-# n-am chef sa mai generez inca un dataset, asa ca ii dau split la asta
+# I don't want to generate another dataset, so I just split the original one
 labels1 = labels[:4]
 labels2 = labels[4:]
 x = StandardScaler().fit_transform(merged[labels1])
@@ -51,7 +52,7 @@ for i in range(m):
 pd.DataFrame(r).to_csv('./dataOUT/r.csv')
 
 # B3
-# nu fac toata functia de bartlett ᗜˬᗜ
+# I won't do bartlett
 
 # C
-# nu stiu lol ᗜˬᗜ
+# I don't know

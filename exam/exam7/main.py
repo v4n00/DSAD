@@ -4,7 +4,7 @@ import pandas as pd
 from scipy.cluster.hierarchy import dendrogram, fcluster, linkage
 from sklearn.preprocessing import StandardScaler
 
-# ᗜˬᗜ - subiect examen furtuna 2023
+# ᗜˬᗜ - subject exam 2023 Furtuna
 rawAlcohol = pd.read_csv('./dataIN/alcohol.csv', index_col=0)
 rawCoduri = pd.read_csv('./dataIN/CoduriTariExtins.csv', index_col=0)
 labels = list(rawAlcohol.columns[1:].values)

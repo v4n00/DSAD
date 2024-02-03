@@ -1,2 +1,0 @@
-am generat datele astea cu ChatGPT
-subiectul C nu sunt sigur ca e facut bine sau e generat bine dataset-ul

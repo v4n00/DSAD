@@ -4,7 +4,8 @@ import pandas as pd
 from scipy.cluster.hierarchy import dendrogram, fcluster, linkage
 from sklearn.preprocessing import StandardScaler
 
-# ᗜˬᗜ - subiect examen furtuna 2024
+# ᗜˬᗜ - subject exam 2024 Furtuna
+# dataset is generated with ChatGPT
 rawAir = pd.read_csv('./dataIN/AirQuality.csv', index_col=0)
 rawContinent = pd.read_csv('./dataIN/CountryContinents.csv', index_col=0)
 labels = list(rawAir.columns.values[1:])
@@ -53,4 +54,4 @@ merged['Cluster'] = clusters
 merged[['Country', 'Cluster']].to_csv('./dataOUT/popt.csv')
 
 # C
-# nu stiu lol ᗜˬᗜ
+# don't know

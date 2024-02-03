@@ -4,6 +4,7 @@ import pandas as pd
 from sklearn.cross_decomposition import CCA
 from sklearn.preprocessing import StandardScaler
 
+# ᗜˬᗜ - subject tutoring 2023/2024 Vinte
 rawInd = pd.read_csv('./dataIN/Industrie.csv', index_col=0)
 rawPop = pd.read_csv('./dataIN/PopulatieLocalitati.csv', index_col=0)
 labels = list(rawInd.columns.values[1:])
@@ -56,14 +57,11 @@ pd.DataFrame(data=Rxz, index=ZLab, columns=prodLab).to_csv('./dataOUT/Rxz.csv')
 pd.DataFrame(data=Ryu, index=ULab, columns=conLab).to_csv('./dataOUT/Ryu.csv')
 
 # req 6
-def biplot(x: np.ndarray, y: np.ndarray):
-    plt.figure(figsize=(7, 7))
-    plt.title("Biplot (z1, u1) / (z2, u2)")
-    plt.xlabel("x")
-    plt.ylabel("y")
-    plt.scatter(x[:, 0], x[:, 1], c='r', label='X')
-    plt.scatter(y[:, 0], y[:, 1], c='b', label='Y')
-    plt.legend()
-    plt.show()
-
-biplot(z[:, [0, 1]], u[:, [0, 1]])
+plt.figure(figsize=(7, 7))
+plt.title("Biplot (z1, u1) / (z2, u2)")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.scatter(z[:, 0], z[:, 1], c='r', label='X')
+plt.scatter(u[:, 0], u[:, 1], c='b', label='Y')
+plt.legend()
+plt.show()

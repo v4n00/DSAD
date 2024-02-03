@@ -2,15 +2,15 @@ import pandas as pd
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.model_selection import train_test_split
 
-x = pd.DataFrame() # NU TREBUIE STANDARDIZAT
-x_applied = pd.DataFrame() # NU TREBUIE STANDARDIZAT
+x = pd.DataFrame() # DOES NOT need to be standardized
+x_applied = pd.DataFrame() # DOES NOT need to be standardized
 
-variabile = list(x.columns.values[:-1]) # toate coloanele inafara de tinta
-tinta = 'VULNERAB' # coloana specificata in cerinta
+tinta = 'VULNERAB' # column specified in the requirements
+variabile = list(x.columns.values[:-1]) # the other columns
 
 x_train, x_test, y_train, y_test = train_test_split(x[variabile], x[tinta], train_size=0.4)
 model = LinearDiscriminantAnalysis()
-model.fit(x_train, y_train) # train la model
+model.fit(x_train, y_train) # trains the model
 
 scores = model.transform(x_test)
 prediction_test = model.predict(x_test)

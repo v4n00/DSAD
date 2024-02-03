@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
-# ᗜˬᗜ - subiect examen furtuna 2023
+# ᗜˬᗜ - subject exam 2023 Furtuna
 rawMort = pd.read_csv('./dataIN/Mortalitate.csv', index_col=0)
 rawCoduri = pd.read_csv('./dataIN/CoduriTariExtins.csv', index_col=0)
 labels = rawMort.columns.values

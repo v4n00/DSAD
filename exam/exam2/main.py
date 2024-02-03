@@ -4,7 +4,8 @@ import pandas as pd
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
-# ᗜˬᗜ - subiect examen furtuna 2024
+# ᗜˬᗜ - subject exam 2024 Furtuna
+# dataset is generated with ChatGPT
 rawIndicators = pd.read_csv('./dataIN/GlobalIndicatorsPerCapita_2021.csv', index_col=0)
 rawContinents = pd.read_csv('./dataIN/CountryContinents.csv', index_col=0)
 labels = list(rawIndicators.columns.values[1:])
@@ -22,8 +23,9 @@ merged[['Country'] + labValAdaugata] \
 .to_csv('./dataOUT/Cerinta1.csv')
 
 # A2
-# este corect asa, stop asking, foloseste formula de population la std ce am scris eu aici,
-# daca dai direct .std pe dataframe foloseste formula de sample la std si nu e bun
+# this is correct, it uses the population formula for the standard deviation,
+# if you do DataFrame.std() it uses the sample formula for the standard deviation,
+# if you want to do that, use argument DataFrame.std(ddof=0)
 merged[['Continent'] + labels] \
 .groupby('Continent') \
 .apply(func=lambda df: pd.Series({ind: np.round(np.std(df[ind]) / np.mean(df[ind]) * 100, 2) for ind in labels})) \

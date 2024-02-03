@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-# ᗜˬᗜ - subiect de test 2024
+# ᗜˬᗜ - example test subject 2024 (there was no test)
 '''
 In the IndustriaAlimentara.csv file there is information on the number of employees in the food industry at locality level. The information is as follows:
 Siruta - Siruta Code of the locality;

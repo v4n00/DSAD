@@ -6,7 +6,7 @@ from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
-# ᗜˬᗜ - subiect examen furtuna 2024
+# ᗜˬᗜ - subject exam 2024 Furtuna
 rawAlcohol = pd.read_csv('./dataIN/alcohol.csv', index_col=0)
 rawCoduri = pd.read_csv('./dataIN/CoduriTariExtins.csv', index_col=0)
 labels = list(rawAlcohol.columns[1:].values)
@@ -53,4 +53,4 @@ plt.title("K-means Clustering on PCA Data")
 plt.show()
 
 # C
-# nu stiu lol ᗜˬᗜ
+# I don't know
